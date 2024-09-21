@@ -1,0 +1,11 @@
+FROM python:3.9-slim
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+COPY nginx.conf /etc/nginx/nginx.conf
+
+CMD ["sh", "-c", "nginx -g 'daemon off;' & gunicorn --bind 0.0.0.0:5001 front_end:app"]

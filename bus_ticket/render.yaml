@@ -1,0 +1,11 @@
+version: 1
+services:
+  - type: web
+    name: my-flask-app
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn --bind 0.0.0.0:8000 wsgi:app
+    envVars:
+      - key: MY_ENV_VAR
+        value: "your_value"  # Optional: Add any environment variables here
